@@ -1,0 +1,5 @@
+.DS_*
+*.a
+*.o
+*.DSY
+HEADING_42
