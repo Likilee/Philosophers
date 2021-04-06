@@ -2,4 +2,4 @@
 *.a
 *.o
 *.DSY
-HEADING_42
+*.dSYM

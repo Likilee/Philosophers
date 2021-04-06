@@ -16,7 +16,7 @@ ex) "../include" */
 /* 사용할 매크로를 적어주세요 여러개가 있다면 ',' 로 구분해 주세요
 ** ex) #define MECRO "BUFFER_SIZE 32, MAX 1024"
 ** 쌍따옴표앞에 역슬래시를 붙여주세요 STR \"hello\" ( " -> \") */
-#define MACRO "USE 1, NOT_USE 0, NO_LIMIT -1, TRUE 1, FALSE 0, DEAD 1, ALIVE 0, FULL 2"
+#define MACRO "USE 1, NOT_USE 0, NO_LIMIT -1, TRUE 1, FALSE 0, DEAD 1, ALIVE 0, FULL 2, SLEEPING 0, EATING 1, FORKING 2, THINKING 3, DYING 4, NOTHING 5"
 
 /* 함수 선언부 위에 소스파일명을 코멘트로 추가하려면 값을 1로 수정해주세요
 ** ex) IF : SRC_NAME COMMENT 1

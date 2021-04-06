@@ -40,8 +40,33 @@
 #  define FULL 2
 # endif
 
+# ifndef SLEEPING
+#  define SLEEPING 0
+# endif
+
+# ifndef EATING
+#  define EATING 1
+# endif
+
+# ifndef FORKING
+#  define FORKING 2
+# endif
+
+# ifndef THINKING
+#  define THINKING 3
+# endif
+
+# ifndef DYING
+#  define DYING 4
+# endif
+
+# ifndef NOTHING
+#  define NOTHING 5
+# endif
+
 typedef struct timeval	t_timeval;
 typedef int				t_bool;
+typedef int				t_status;
 typedef struct			s_setting
 {
 	int					number_of_philosophers;
@@ -51,6 +76,7 @@ typedef struct			s_setting
 	int					number_of_times_each_philosopher_must_eat;
 	t_timeval			time_start_experiment;
 	pthread_mutex_t		*fork;
+	pthread_mutex_t		print_mutex;
 	t_bool				someone_dead;
 }						t_setting;
 
@@ -63,6 +89,7 @@ typedef struct			s_philo
 	int					right_fork;
 	t_timeval			time_last_ate;
 	t_setting			*setting;
+	t_status			status;
 }						t_philo;
 
 /*
@@ -95,22 +122,25 @@ t_setting				*parse_argv(int ac, char *av[]);
 /*
 ** Src is : ../src/print.c
 */
+void					print_status(t_philo *philo);
 void					print_take_fork(t_philo *philo);
 void					print_is_eating(t_philo *philo);
 void					print_is_sleeping(t_philo *philo);
 void					print_is_thinking(t_philo *philo);
 void					print_died(t_philo *philo);
+void					print_timeval(t_timeval time, const char *s);
 
 /*
 ** Src is : ../src/test.c
 */
 void					print_setting(t_setting *setting);
+void					minus_time_test();
 
 /*
 ** Src is : ../src/time.c
 */
 void					sleep_for_ms(int millisecond);
-long					minus_time(t_timeval end, t_timeval begin);
+long					minus_time(t_timeval *end, t_timeval *begin);
 
 /*
 ** Src is : ../src/utils.c

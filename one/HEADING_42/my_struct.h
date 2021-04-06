@@ -10,6 +10,8 @@ typedef struct timeval	t_timeval;
 
 typedef int	t_bool;
 
+typedef int	t_status;
+
 typedef struct	s_setting
 {
 	int	number_of_philosophers;
@@ -19,6 +21,7 @@ typedef struct	s_setting
 	int	number_of_times_each_philosopher_must_eat;
 	t_timeval	time_start_experiment;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	print_mutex;
 	t_bool	someone_dead;
 }			t_setting;
 
@@ -31,6 +34,7 @@ typedef struct	s_philo
 	int			right_fork;
 	t_timeval	time_last_ate;
 	t_setting	*setting;
+	t_status	status;
 }	t_philo;
 
 /* -End- finish!# */

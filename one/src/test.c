@@ -11,3 +11,14 @@ void	print_setting(t_setting *setting)
 	printf("===========================\n\n");
 
 }
+
+void	minus_time_test()
+{
+	t_timeval		end;
+	t_timeval		begin;
+
+	gettimeofday(&begin, NULL);
+	sleep_for_ms(1000);
+	gettimeofday(&end, NULL);
+	printf("End - Begin must be 1000ms\nresult: %ld\n", minus_time(&end, &begin));
+}
