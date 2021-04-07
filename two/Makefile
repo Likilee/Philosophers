@@ -7,9 +7,7 @@ SRC_NAME = main \
 			time \
 			utils \
 			do \
-			print_status \
-			print_current_job \
-			experiment
+			print
 
 SRCDIR = ./src
 SRC = $(addprefix $(SRCDIR)/,$(addsuffix .c, $(SRC_NAME)))
@@ -30,7 +28,7 @@ bonus : all
 run : all
 	./$(NAME)
 $(NAME) : $(SRC)
-	cd HEADING_42 && ./heading42.sh
+	# cd HEADING_42 && ./heading42.sh
 	gcc $(CFLAG) -o $@ $(SRC) $(INCLUDE)
 
 .PONY : all clean fclean re bonus run

@@ -29,6 +29,7 @@ typedef struct	s_philo
 {
 	int			number;
 	int			ate_count;
+	// t_bool		ate_enough;
 	int			left_fork;
 	int			right_fork;
 	t_timeval	time_last_ate;
