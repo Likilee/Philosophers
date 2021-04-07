@@ -20,8 +20,8 @@ typedef struct	s_setting
 	int	time_to_sleep;
 	int	number_of_times_each_philosopher_must_eat;
 	t_timeval	time_start_experiment;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	print_mutex;
+	sem_t	*fork;
+	sem_t	*print_sem;
 	t_bool	someone_dead;
 }			t_setting;
 
@@ -29,9 +29,6 @@ typedef struct	s_philo
 {
 	int			number;
 	int			ate_count;
-	// t_bool		ate_enough;
-	int			left_fork;
-	int			right_fork;
 	t_timeval	time_last_ate;
 	t_setting	*setting;
 	t_status	status;
