@@ -43,7 +43,7 @@ int		do_sleep(t_philo *philo)
 		return (DEAD);
 	philo->status = SLEEPING;
 	print_status(philo);
-	sleep_for_ms(philo->setting->time_to_sleep);
+	usleep(1000 * philo->setting->time_to_sleep);
 	return (ALIVE);
 }
 
@@ -66,7 +66,7 @@ int		do_eat(t_philo *philo)
 	gettimeofday(&philo->time_last_ate, NULL);
 	print_status(philo);
 	// usleep(philo->setting->time_to_eat * 1000);
-	sleep_for_ms(philo->setting->time_to_eat);
+	usleep(1000 * philo->setting->time_to_eat);
 	++philo->ate_count;
 	if (philo->setting->number_of_times_each_philosopher_must_eat != NO_LIMIT &&
 		philo->ate_count >= philo->setting->number_of_times_each_philosopher_must_eat)
@@ -96,7 +96,7 @@ void	*am_i_dead(void *philo_data)
 	philo = (t_philo *)philo_data;
 	while (1)
 	{
-		sleep_for_ms(1); // 이거로 해결..
+		usleep(1000 * 1); // 이거로 해결..
 		if (philo->ate_enough == TRUE || philo->setting->someone_dead == TRUE)
 			break ;
 		gettimeofday(&now, NULL);
@@ -126,7 +126,7 @@ void	*philo_do_his_job(void *philo_data)
 
 	philo = (t_philo *)philo_data;
 	if (philo->number % 2 == 0)
-		sleep_for_ms(10);
+		usleep(1000 * 10);
 		// do_sleep(philo);
 	pthread_create(&dead_checker, NULL, am_i_dead, (void *)philo);
 	while (1)

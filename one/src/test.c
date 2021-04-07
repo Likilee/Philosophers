@@ -18,7 +18,7 @@ void	minus_time_test()
 	t_timeval		begin;
 
 	gettimeofday(&begin, NULL);
-	sleep_for_ms(1000);
+	usleep(1000 * 1000);
 	gettimeofday(&end, NULL);
 	printf("End - Begin must be 1000ms\nresult: %ld\n", minus_time(&end, &begin));
 }
