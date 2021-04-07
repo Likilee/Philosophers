@@ -1,5 +1,5 @@
 NAME = philo_one
-CFLAG = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAG = #-g3 -fsanitize=address -Wall -Wextra -Werror
 SRC_NAME = main \
 			parse \
 			error \
@@ -20,6 +20,7 @@ clean :
 
 fclean : clean
 	rm -rf $(NAME)
+	rm -rf $(NAME).dSYM
 re : fclean all
 
 bonus : all
@@ -27,7 +28,7 @@ bonus : all
 run : all
 	./$(NAME)
 $(NAME) : $(SRC)
-	cd HEADING_42 && ./heading42.sh
+	# cd HEADING_42 && ./heading42.sh
 	gcc $(CFLAG) -o $@ $(SRC) $(INCLUDE)
 
 .PONY : all clean fclean re bonus run

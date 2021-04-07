@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/07 14:52:58 by kilee             #+#    #+#             */
+/*   Updated: 2021/04/07 14:54:57 by kilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "one.h"
 
 t_setting	*parse_argv(int ac, char *av[])
 {
 	t_setting	*setting;
 
-	setting = (t_setting *)malloc(sizeof(t_setting));
-	if (setting == NULL)
+	if (!(setting = (t_setting *)malloc(sizeof(t_setting))))
 		return (NULL);
 	setting->number_of_philosophers = ft_atoi(av[1]);
 	setting->time_to_die = ft_atoi(av[2]);

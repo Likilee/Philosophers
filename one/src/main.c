@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/07 14:52:42 by kilee             #+#    #+#             */
+/*   Updated: 2021/04/07 14:52:43 by kilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "one.h"
 
 int		main(int ac, char *av[])
@@ -9,7 +21,6 @@ int		main(int ac, char *av[])
 	setting = parse_argv(ac, av);
 	if (setting == NULL)
 		return (error_arg_value());
-	print_setting(setting);
 	if (start_experiment(setting) == -1)
 		return (error_unexpected());
 	return (0);

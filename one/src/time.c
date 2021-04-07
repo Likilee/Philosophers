@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/07 14:57:22 by kilee             #+#    #+#             */
+/*   Updated: 2021/04/07 14:57:23 by kilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "one.h"
 
 void		sleep_for_ms(int millisecond)
@@ -8,9 +20,9 @@ void		sleep_for_ms(int millisecond)
 
 	gettimeofday(&begin, NULL);
 	base = begin.tv_sec * 1000 + begin.tv_usec / 1000;
-	// printf("begin: %d\n", begin.tv_usec);
 	while (1)
 	{
+		usleep(10);
 		gettimeofday(&now, NULL);
 		if ((now.tv_sec * 1000 + now.tv_usec / 1000) -
 			(base) >=
