@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:57:22 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 14:57:23 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/08 15:02:38 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		sleep_for_ms(int millisecond)
 	base = begin.tv_sec * 1000 + begin.tv_usec / 1000;
 	while (1)
 	{
-		usleep(10);
+		usleep(100);
 		gettimeofday(&now, NULL);
 		if ((now.tv_sec * 1000 + now.tv_usec / 1000) -
 			(base) >=

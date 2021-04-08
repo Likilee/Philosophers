@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   one.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 15:03:11 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 15:03:28 by kilee            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef ONE_H
 # define ONE_H
 
@@ -165,6 +153,6 @@ long					minus_time(t_timeval *end, t_timeval *begin);
 int						ft_atoi(const char *str);
 pthread_mutex_t			*init_fork(int number_of_fork);
 void					destroy_fork(pthread_mutex_t *fork, int number_of_fork);
-void					init_philo(t_philo *philo, int number,
-									t_setting *setting);
+void					init_philo(t_philo *philo, int number, t_setting *setting);
+
 #endif

@@ -6,11 +6,11 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:56:28 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 15:26:19 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "one.h"
+#include "three.h"
 
 void		print_status(t_philo *philo)
 {

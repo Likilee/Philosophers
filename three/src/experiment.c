@@ -6,13 +6,38 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:49:28 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 15:40:17 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "one.h"
+#include "three.h"
 
-int			start_experiment(t_setting *setting)
+int			start_experiment(t_setup *setting)
+{
+	pid_t		pid;
+	t_philo		philo;
+	int			i;
+
+	i = -1;
+	while(++i < setting->number_of_philosophers)
+	{
+		pid = fork();
+		if (pid == 0)
+			break;
+	}
+	if (pid < 0)
+		return (-1);
+	if (i != setting->number_of_philosophers) // 자식
+	{
+		init_philo(&philo, i + 1, setting);
+		philo_do_his_job(&philo);
+	}
+	else
+		manage_process();
+	return (0);
+}
+
+int			start_experiment(t_setup *setting)
 {
 	pthread_t		*philo_thread;
 	t_philo			*philo;
@@ -38,13 +63,11 @@ int			start_experiment(t_setting *setting)
 	return (0);
 }
 
-void		*philo_do_his_job(void *philo_data)
+void		philo_do_his_job(t_philo *philo)
 {
-	t_philo		*philo;
 	pthread_t	dead_checker;
 
-	philo = (t_philo *)philo_data;
-	philo->time_last_ate = philo->setting->time_start_experiment;
+	gettimeofday(&philo->time_last_ate, NULL);
 	if (philo->number % 2 == 0)
 		sleep_for_ms(10);
 	pthread_create(&dead_checker, NULL, am_i_dead, (void *)philo);
@@ -60,7 +83,6 @@ void		*philo_do_his_job(void *philo_data)
 			break ;
 	}
 	pthread_join(dead_checker, NULL);
-	return (NULL);
 }
 
 void		*am_i_dead(void *philo_data)
@@ -78,6 +100,7 @@ void		*am_i_dead(void *philo_data)
 		if (minus_time(&now, &philo->time_last_ate)
 			> philo->setting->time_to_die)
 		{
+			sem_wait(philo->setting->dead_sem);
 			philo->status = DYING;
 			print_status(philo);
 			break ;

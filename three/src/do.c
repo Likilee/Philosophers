@@ -6,11 +6,11 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:43:41 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 15:25:35 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "one.h"
+#include "three.h"
 
 int				do_sleep(t_philo *philo)
 {
@@ -51,9 +51,9 @@ int				do_eat(t_philo *philo)
 
 t_bool			eat_enough(t_philo *philo)
 {
-	if (philo->setting->number_of_times_each_philosopher_must_eat != NO_LIMIT
+	if (philo->setting->number_of_must_eat != NO_LIMIT
 		&& philo->ate_count >=
-		philo->setting->number_of_times_each_philosopher_must_eat)
+		philo->setting->number_of_must_eat)
 		return (TRUE);
 	return (FALSE);
 }

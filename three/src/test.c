@@ -6,13 +6,13 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:58:20 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/07 14:58:46 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "one.h"
+#include "three.h"
 
-void	print_setting(t_setting *setting)
+void	print_setup(t_setup *setting)
 {
 	printf("==== TEST PRINT SETTING ====\n");
 	printf("NUM_of_philo  : %d\n", setting->number_of_philosophers);
@@ -20,7 +20,7 @@ void	print_setting(t_setting *setting)
 	printf("TIME_to_eat   : %d\n", setting->time_to_eat);
 	printf("TIME_to_sleep : %d\n", setting->time_to_sleep);
 	printf("NUM_of_eat    : %d\n",
-			setting->number_of_times_each_philosopher_must_eat);
+			setting->number_of_must_eat);
 	printf("===========================\n\n");
 }
 
