@@ -6,58 +6,54 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:55:04 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/09 16:02:36 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "three.h"
 
-void		print_take_fork(t_philo *philo)
+void		print_take_fork(t_philo *philo, long now)
 {
-	t_timeval	now;
-	long		time_ms;
+	long		time;
 
-	gettimeofday(&now, NULL);
-	time_ms = minus_time(&now, &philo->setting->time_start_experiment);
-	printf("%ld %d has taken a fork \n", time_ms, philo->number);
+	time = now - philo->time_start;
+	printf("%ld %d has taken a fork \n", time, philo->number);
+	// write(1, "fork\n", 5);
 }
 
-void		print_is_eating(t_philo *philo)
+void		print_is_eating(t_philo *philo, long now)
 {
-	t_timeval	now;
-	long		time_ms;
+	long		time;
 
-	gettimeofday(&now, NULL);
-	time_ms = minus_time(&now, &philo->setting->time_start_experiment);
-	printf("%ld %d is eating\n", time_ms, philo->number);
+	time = now - philo->time_start;
+	printf("%ld %d is eating\n", time, philo->number);
+	// write(1, "eat\n", 4);
+
 }
 
-void		print_is_sleeping(t_philo *philo)
+void		print_is_sleeping(t_philo *philo, long now)
 {
-	t_timeval	now;
-	long		time_ms;
+	long		time;
 
-	gettimeofday(&now, NULL);
-	time_ms = minus_time(&now, &philo->setting->time_start_experiment);
-	printf("%ld %d is sleeping\n", time_ms, philo->number);
+	time = now - philo->time_start;
+	printf("%ld %d is sleeping\n", time, philo->number);
+	// write(1, "sleep\n", 6);
 }
 
-void		print_is_thinking(t_philo *philo)
+void		print_is_thinking(t_philo *philo, long now)
 {
-	t_timeval	now;
-	long		time_ms;
+	long		time;
 
-	gettimeofday(&now, NULL);
-	time_ms = minus_time(&now, &philo->setting->time_start_experiment);
-	printf("%ld %d is thinking\n", time_ms, philo->number);
+	time = now - philo->time_start;
+	printf("%ld %d is thinking\n", time, philo->number);
+	// write(1, "think\n", 6);
 }
 
-void		print_died(t_philo *philo)
+void		print_died(t_philo *philo, long now)
 {
-	t_timeval	now;
-	long		time_ms;
+	long		time;
 
-	gettimeofday(&now, NULL);
-	time_ms = minus_time(&now, &philo->setting->time_start_experiment);
-	printf("%ld %d died\n", time_ms, philo->number);
+	time = now - philo->time_start;
+	printf("%ld %d died\n", time, philo->number);
+	// write(1, "died\n", 5);
 }

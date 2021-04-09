@@ -9,7 +9,11 @@ SRC_NAME = main \
 			do \
 			print_status \
 			print_current_job \
-			experiment
+			experiment \
+			clear \
+			prepare_experiment \
+			is_valid_arguments \
+			manage_process
 
 SRCDIR = ./src
 SRC = $(addprefix $(SRCDIR)/,$(addsuffix .c, $(SRC_NAME)))

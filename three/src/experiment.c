@@ -6,70 +6,39 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:49:28 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/09 16:46:01 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "three.h"
 
-int			start_experiment(t_setup *setting)
+void			run_experiment(t_setup *setup)
 {
-	pid_t		pid;
-	t_philo		philo;
 	int			i;
 
 	i = -1;
-	while(++i < setting->number_of_philosophers)
+	while(++i < setup->number_of_philosophers)
 	{
-		pid = fork();
-		if (pid == 0)
+		setup->philo[i].pid = fork();
+		if (setup->philo[i].pid == 0)
 			break;
 	}
-	if (pid < 0)
-		return (-1);
-	if (i != setting->number_of_philosophers) // 자식
-	{
-		init_philo(&philo, i + 1, setting);
-		philo_do_his_job(&philo);
-	}
+	if (setup->philo[i].pid < 0)
+		error_unexpected();
+	if (i != setup->number_of_philosophers) // 자식
+		philo_do_his_job(&setup->philo[i]);
 	else
-		manage_process();
-	return (0);
-}
-
-int			start_experiment(t_setup *setting)
-{
-	pthread_t		*philo_thread;
-	t_philo			*philo;
-	int				i;
-
-	philo_thread = malloc(sizeof(pthread_t) * setting->number_of_philosophers);
-	philo = malloc(sizeof(t_philo) * setting->number_of_philosophers);
-	if (philo_thread == NULL || philo == NULL)
-		return (-1);
-	i = -1;
-	while (++i < setting->number_of_philosophers)
-		init_philo(&philo[i], i + 1, setting);
-	i = -1;
-	gettimeofday(&setting->time_start_experiment, NULL);
-	while (++i < setting->number_of_philosophers)
-		pthread_create(&philo_thread[i], NULL,
-						philo_do_his_job, (void *)&philo[i]);
-	i = -1;
-	while (++i < setting->number_of_philosophers)
-		pthread_join(philo_thread[i], NULL);
-	sem_close(setting->fork);
-	sem_close(setting->print_sem);
-	return (0);
+		manage_process(setup);
 }
 
 void		philo_do_his_job(t_philo *philo)
 {
 	pthread_t	dead_checker;
 
-	gettimeofday(&philo->time_last_ate, NULL);
+	philo->time_last_ate = get_m_second();
 	if (philo->number % 2 == 0)
-		sleep_for_ms(10);
+		sleep_for_ms(1);
+		// usleep(500);
 	pthread_create(&dead_checker, NULL, am_i_dead, (void *)philo);
 	while (1)
 	{
@@ -88,23 +57,21 @@ void		philo_do_his_job(t_philo *philo)
 void		*am_i_dead(void *philo_data)
 {
 	t_philo		*philo;
-	t_timeval	now;
+	long		now;
 
 	philo = (t_philo *)philo_data;
 	while (1)
 	{
-		usleep(1);
-		if (philo->status == FULL || philo->setting->someone_dead == TRUE)
-			break ;
-		gettimeofday(&now, NULL);
-		if (minus_time(&now, &philo->time_last_ate)
-			> philo->setting->time_to_die)
+		if (philo->status == FULL)
+			exit(0) ;
+		now = get_m_second();
+		if (now - philo->time_last_ate >= philo->setup->time_to_die)
 		{
-			sem_wait(philo->setting->dead_sem);
 			philo->status = DYING;
-			print_status(philo);
-			break ;
+			print_status(philo, now);
+			exit(1);
 		}
+		usleep(100);
 	}
 	return (NULL);
 }

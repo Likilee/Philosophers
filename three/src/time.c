@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:57:22 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/09 16:03:54 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void		sleep_for_ms(int millisecond)
 {
-	t_timeval	begin;
-	t_timeval	now;
-	long		base;
+	long		begin;
+	long		now;
 
-	gettimeofday(&begin, NULL);
-	base = begin.tv_sec * 1000 + begin.tv_usec / 1000;
+	begin = get_m_second();
 	while (1)
 	{
-		usleep(10);
-		gettimeofday(&now, NULL);
-		if ((now.tv_sec * 1000 + now.tv_usec / 1000) -
-			(base) >=
-			millisecond)
+		now = get_m_second();
+		if (now - begin >= millisecond)
 			return ;
+		usleep(500);
 	}
+	// usleep(millisecond * 1000);
+}
+
+long		get_m_second()
+{
+	t_timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
 long		minus_time(t_timeval *end, t_timeval *begin)

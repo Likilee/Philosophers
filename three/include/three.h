@@ -8,6 +8,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # ifndef USE
 #  define USE 1
@@ -68,12 +69,16 @@
 typedef struct timeval	t_timeval;
 typedef int				t_bool;
 typedef int				t_status;
+typedef struct s_setup	t_setup;
 typedef struct			s_philo
 {
 	pid_t				pid;
 	int					number;
 	int					ate_count;
-	t_timeval			time_last_ate;
+	t_setup				*setup;
+	long				time_start;
+	long				time_last_ate;
+	long				time_now;
 	t_status			status;
 }						t_philo;
 
@@ -88,8 +93,12 @@ typedef struct			s_setup
 	t_timeval			time_start_experiment;
 	sem_t				*fork;
 	sem_t				*print_sem;
-	sem_t				*dead_sem;
 }						t_setup;
+
+/*
+** Src is : ../src/clear.c
+*/
+void					clear(t_setup *setup);
 
 /*
 ** Src is : ../src/do.c
@@ -109,10 +118,22 @@ int						error_unexpected(void);
 /*
 ** Src is : ../src/experiment.c
 */
-int						start_experiment(t_setup *setting);
-int						start_experiment(t_setup *setting);
+void					run_experiment(t_setup *setup);
 void					philo_do_his_job(t_philo *philo);
 void					*am_i_dead(void *philo_data);
+
+/*
+** Src is : ../src/is_valid_arguments.c
+*/
+t_bool					is_valid_arguments(int ac, char *av[]);
+
+/*
+** Src is : ../src/manage_process.c
+*/
+void					manage_process(t_setup *setup);
+t_bool					is_full_philo(int status);
+t_bool					is_dead_philo(int status);
+void					finish_experiment(t_setup *setup);
 
 /*
 ** Src is : ../src/parse.c
@@ -123,20 +144,22 @@ void					parse_arguments(t_setup *setup, int ac, char *av[]);
 ** Src is : ../src/prepare_experiment.c
 */
 void					prepare_experiment(t_setup *setup);
+void					init_philosophers(t_setup *setup);
+void					init_semaphore(t_setup *setup);
 
 /*
 ** Src is : ../src/print_current_job.c
 */
-void					print_take_fork(t_philo *philo);
-void					print_is_eating(t_philo *philo);
-void					print_is_sleeping(t_philo *philo);
-void					print_is_thinking(t_philo *philo);
-void					print_died(t_philo *philo);
+void					print_take_fork(t_philo *philo, long now);
+void					print_is_eating(t_philo *philo, long now);
+void					print_is_sleeping(t_philo *philo, long now);
+void					print_is_thinking(t_philo *philo, long now);
+void					print_died(t_philo *philo, long now);
 
 /*
 ** Src is : ../src/print_status.c
 */
-void					print_status(t_philo *philo);
+void					print_status(t_philo *philo, long now);
 
 /*
 ** Src is : ../src/test.c
@@ -149,18 +172,12 @@ void					minus_time_test(void);
 ** Src is : ../src/time.c
 */
 void					sleep_for_ms(int millisecond);
+long					get_m_second();
 long					minus_time(t_timeval *end, t_timeval *begin);
 
 /*
 ** Src is : ../src/utils.c
 */
 int						ft_atoi(const char *str);
-void					init_semaphore(t_setup *setting);
-sem_t					*init_fork(int number_of_fork);
-sem_t					*init_print_sem(void);
-sem_t					*init_dead_sem(void);
-sem_t					*init_end_eating_sem(int number_of_must_eat);
-void					destroy_fork(pthread_mutex_t *fork, int number_of_fork);
-void					init_philo(t_philo *philo, int number, t_setup *setting);
 
 #endif
