@@ -26,7 +26,6 @@ void	init_philosophers(t_setup *setup)
 		philo[i].ate_count = 0;
 		philo[i].status = NOTHING;
 		philo[i].setup = setup;
-		philo[i].time_start = start_time;
 	}
 }
 

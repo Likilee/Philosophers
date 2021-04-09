@@ -22,7 +22,7 @@ void		manage_process(t_setup *setup)
 			waitpid(philo->pid, &status, WNOHANG);
 			if (is_full_philo(status))
 				++full_philo;
-			if (is_dead_philo(status) || full_philo == setup->number_of_philosophers)
+			if (status != -1 || full_philo == setup->number_of_philosophers)
 			{
 				finish_experiment(setup);
 				return ;
@@ -33,7 +33,8 @@ void		manage_process(t_setup *setup)
 		// 	return ;
 		// }
 		// write(1, "hi\n", 3);
-		usleep(1000);
+		// printf("hi");
+		// usleep(1000);
 	}
 }
 
