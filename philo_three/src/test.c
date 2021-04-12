@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:58:20 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/08 13:59:07 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/12 10:47:14 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,4 @@ void	print_timeval(t_timeval time, const char *s)
 	millisecond = time.tv_sec * 1000 + time.tv_usec / 1000;
 	printf("%s :", s);
 	printf(" %ld ms\n", millisecond);
-}
-
-void	minus_time_test(void)
-{
-	t_timeval		end;
-	t_timeval		begin;
-
-	gettimeofday(&begin, NULL);
-	sleep_for_ms(1000);
-	gettimeofday(&end, NULL);
-	printf("End - Begin must be 1000ms\nresult: %ld\n",
-			minus_time(&end, &begin));
 }

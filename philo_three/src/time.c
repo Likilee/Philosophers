@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:57:22 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/09 16:03:54 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/12 10:35:43 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,12 @@ void		sleep_for_ms(int millisecond)
 			return ;
 		usleep(500);
 	}
-	// usleep(millisecond * 1000);
 }
 
-long		get_m_second()
+long		get_m_second(void)
 {
 	t_timeval	now;
 
 	gettimeofday(&now, NULL);
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
-}
-
-long		minus_time(t_timeval *end, t_timeval *begin)
-{
-	long		time;
-
-	time = (end->tv_sec * 1000 + end->tv_usec / 1000)
-		- (begin->tv_sec * 1000 + begin->tv_usec / 1000);
-	return (time);
 }

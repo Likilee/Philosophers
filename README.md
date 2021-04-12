@@ -20,12 +20,12 @@
 ### 핵심 기능 흐름
 
 > - 인자 파싱 (parse.c)
->   - 인자 유효성 검사 (if (is_valid_arguments)) 
+>   - 인자 유효성 검사 (if (is_valid_arguments))
 >   - 인자 설정 구조체에 저장 (parse_argument)
->     - 설정 구조체 t_setup
+>     - 설정 구조체 t_set_up
 > - 실험 준비 (prepare_experiment.c)
 >   - 철학자들 초기화 (init_philosophers)
->     - 
+>     -
 >   - 설정 구조체에 실험 준비 데이터 초기화 (init_semaphore)
 > - 실험 진행 (run_experiment.c)
 >   - 각 철학자를 자식 프로세스로 분기 > 철학자들의 일을 시키기
@@ -38,7 +38,7 @@
 
 
 ```c
-typedef struct	s_setup
+typedef struct	s_set_up
 {
 	int	number_of_philosophers;
 	int	time_to_die;
@@ -49,14 +49,14 @@ typedef struct	s_setup
 	sem_t	*fork_sema;
 	sem_t	*print_sema;
 	sem_t	*dead_sema;
-}			t_setup;
+}			t_set_up;
 
 typedef struct	s_philo
 {
 	int			number;
 	int			ate_count;
 	t_timeval	time_last_ate;
-	t_setup	*setup;
+	t_set_up	*setup;
 	t_status	status;
 }								t_philo;
 ```

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   three.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/12 10:49:11 by kilee             #+#    #+#             */
+/*   Updated: 2021/04/12 10:49:12 by kilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef THREE_H
 # define THREE_H
 
@@ -69,13 +81,12 @@
 typedef struct timeval	t_timeval;
 typedef int				t_bool;
 typedef int				t_status;
-typedef struct s_setup	t_setup;
 typedef struct			s_philo
 {
 	pid_t				pid;
 	int					number;
 	int					ate_count;
-	t_setup				*setup;
+	struct s_setup		*setup;
 	long				time_start;
 	long				time_last_ate;
 	long				time_now;
@@ -112,7 +123,7 @@ int						do_think(t_philo *philo);
 /*
 ** Src is : ../src/error.c
 */
-void					error_arguments();
+void					error_arguments(void);
 int						error_unexpected(void);
 
 /*
@@ -166,14 +177,12 @@ void					print_status(t_philo *philo, long now);
 */
 void					print_setup(t_setup *setting);
 void					print_timeval(t_timeval time, const char *s);
-void					minus_time_test(void);
 
 /*
 ** Src is : ../src/time.c
 */
 void					sleep_for_ms(int millisecond);
-long					get_m_second();
-long					minus_time(t_timeval *end, t_timeval *begin);
+long					get_m_second(void);
 
 /*
 ** Src is : ../src/utils.c

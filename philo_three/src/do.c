@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:43:41 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/09 18:33:18 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/12 10:32:56 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int				do_think(t_philo *philo)
 	long	now;
 
 	now = get_m_second();
-	// if (philo->setup->someone_dead == TRUE)
-	// 	return (DEAD);
 	philo->status = THINKING;
 	print_status(philo, now);
 	return (ALIVE);

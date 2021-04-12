@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_process.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/12 10:31:54 by kilee             #+#    #+#             */
+/*   Updated: 2021/04/12 10:47:14 by kilee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "three.h"
 
 /*
 ** exit code 0 : FULL 로 끝난애
 ** exit code 1 : DEAD 로 끝난애
 */
+
 void		manage_process(t_setup *setup)
 {
 	int		i;
@@ -22,19 +35,14 @@ void		manage_process(t_setup *setup)
 			waitpid(philo->pid, &status, WNOHANG);
 			if (is_full_philo(status))
 				++full_philo;
-			if (status != -1 || full_philo == setup->number_of_philosophers)
+			if (is_dead_philo(status)
+				|| full_philo == setup->number_of_philosophers)
 			{
 				finish_experiment(setup);
 				return ;
 			}
 		}
-		// if (is_dead_philo(status) || full_philo == setup->number_of_philosophers)
-		// {
-		// 	return ;
-		// }
-		// write(1, "hi\n", 3);
-		// printf("hi");
-		// usleep(1000);
+		usleep(500);
 	}
 }
 

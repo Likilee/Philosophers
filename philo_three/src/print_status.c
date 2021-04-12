@@ -6,7 +6,7 @@
 /*   By: kilee <kilee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 14:56:28 by kilee             #+#    #+#             */
-/*   Updated: 2021/04/09 18:15:52 by kilee            ###   ########.fr       */
+/*   Updated: 2021/04/12 10:35:58 by kilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ void		print_status(t_philo *philo, long now)
 		print_is_thinking(philo, now);
 	else if (philo->status == DYING)
 	{
-		// printf("11\n");
 		print_died(philo, now);
-		// printf("22\n");
 		exit(1);
 	}
 	sem_post(philo->setup->print_sem);
